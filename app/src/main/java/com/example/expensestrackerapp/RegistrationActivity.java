@@ -64,6 +64,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 // I can add more validations here
 
                 mDialog.setMessage("Processing");
+                mDialog.show();
 
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
