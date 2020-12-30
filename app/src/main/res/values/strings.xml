@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ExpensesTrackerApp</string>
+    <string name="menu_dash">Dashboard</string>
+    <string name="menu_income">Income</string>
+    <string name="menu_expenses">Expenses</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

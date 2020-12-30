@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private EditText mEmail;
     private EditText mPassword;
     private Button mBtnLogin;
@@ -36,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDialog = new ProgressDialog(this);
-
         fAuth = FirebaseAuth.getInstance();
+        if (fAuth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        }
 
+        mDialog = new ProgressDialog(this);
         loginDetails();
     }
 
@@ -74,11 +78,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             mDialog.dismiss();
+                            Log.d(TAG, "Login successful");
                             Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         }else{
+                            String localizedMessage = task.getException().getLocalizedMessage();
+                            Log.d(TAG, "Error during user login attempt: "  + localizedMessage);
                             mDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG);
+                            Toast.makeText(getApplicationContext(),
+                                    "Login Failed: " + localizedMessage,
+                                    Toast.LENGTH_LONG
+                            ).show();
                         }
                     }
                 });
