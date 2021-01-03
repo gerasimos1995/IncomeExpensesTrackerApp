@@ -13,5 +13,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="toolbar_color">#5A4837</color>
+    <color name="toolbar_color">#9C5F26</color>
+    <color name="dashboard_color">#DAB23B</color>
+    <color name="income_color">#2F680D</color>
+    <color name="expenses_color">#105081</color>
 </resources>

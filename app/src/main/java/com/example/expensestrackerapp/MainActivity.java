@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // This is so if the user is already logged in and is authorized
+        // There is no need for login
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(), HomeActivity.class));
