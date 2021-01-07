@@ -9,12 +9,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 // Login Activity
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,10 +29,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private IncomeFragment incomeFragment;
     private ExpensesFragment expensesFragment;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        mAuth = FirebaseAuth.getInstance();
 
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         toolbar.setTitle("Expenses Manager");
@@ -104,17 +110,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (itemId){
             case R.id.dashboard:
                 fragment = new DashboardFragment();
-                bottomNavigationView.setItemBackgroundResource(R.color.dashboard_color);
+                bottomNavigationView.setItemBackgroundResource(R.drawable.background_color);
                 break;
 
             case R.id.income:
                 fragment = new IncomeFragment();
-                bottomNavigationView.setItemBackgroundResource(R.color.income_color);
+                bottomNavigationView.setItemBackgroundResource(R.drawable.background_green);
                 break;
 
             case R.id.expenses:
                 fragment = new ExpensesFragment();
-                bottomNavigationView.setItemBackgroundResource(R.color.expenses_color);
+                bottomNavigationView.setItemBackgroundResource(R.drawable.background_blue);
+                break;
+            case R.id.logout:
+                mAuth.signOut();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 break;
         }
 

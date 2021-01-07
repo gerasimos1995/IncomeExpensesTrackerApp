@@ -13,4 +13,8 @@
         android:title="@string/menu_expenses"
         android:icon="@drawable/expenses"/>
 
+    <item android:id="@+id/logout"
+        android:title="Logout"
+        android:icon="@drawable/logout"/>
+
 </menu>
